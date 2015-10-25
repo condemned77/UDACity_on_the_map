@@ -15,6 +15,7 @@
 		38B4DEB41BDCF1A20021B9C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B4DEB21BDCF1A20021B9C4 /* LaunchScreen.storyboard */; };
 		38B4DEBF1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEBE1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift */; };
 		38B4DECA1BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */; };
+		38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		38B4DEC51BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UDACity_on_the_mapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDACity_on_the_mapUITests.swift; sourceTree = "<group>"; };
 		38B4DECB1BDCF1A20021B9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				38B4DEB01BDCF1A20021B9C4 /* Assets.xcassets */,
 				38B4DEB21BDCF1A20021B9C4 /* LaunchScreen.storyboard */,
 				38B4DEB51BDCF1A20021B9C4 /* Info.plist */,
+				38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */,
 			);
 			path = UDACity_on_the_map;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */,
 				38B4DEAC1BDCF1A20021B9C4 /* SecondViewController.swift in Sources */,
 				38B4DEA81BDCF1A20021B9C4 /* AppDelegate.swift in Sources */,
 				38B4DEAA1BDCF1A20021B9C4 /* FirstViewController.swift in Sources */,
