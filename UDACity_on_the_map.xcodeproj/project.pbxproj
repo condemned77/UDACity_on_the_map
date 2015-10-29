@@ -16,6 +16,9 @@
 		38B4DEBF1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEBE1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift */; };
 		38B4DECA1BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */; };
 		38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */; };
+		4CB1F7441BE1238300BEC607 /* UDACityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7431BE1238300BEC607 /* UDACityClient.swift */; };
+		4CB1F7461BE123C500BEC607 /* UDACityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */; };
+		4CB1F7481BE1251000BEC607 /* UDACityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDACity_on_the_mapUITests.swift; sourceTree = "<group>"; };
 		38B4DECB1BDCF1A20021B9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4CB1F7431BE1238300BEC607 /* UDACityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDACityClient.swift; path = Model/UDACityClient.swift; sourceTree = "<group>"; };
+		4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDACityConstants.swift; sourceTree = "<group>"; };
+		4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDACityConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		38B4DEA61BDCF1A20021B9C4 /* UDACity_on_the_map */ = {
 			isa = PBXGroup;
 			children = (
+				4CB1F7421BE1233200BEC607 /* Model */,
 				38B4DEA71BDCF1A20021B9C4 /* AppDelegate.swift */,
 				38B4DEA91BDCF1A20021B9C4 /* FirstViewController.swift */,
 				38B4DEAB1BDCF1A20021B9C4 /* SecondViewController.swift */,
@@ -129,6 +136,16 @@
 				38B4DECB1BDCF1A20021B9C4 /* Info.plist */,
 			);
 			path = UDACity_on_the_mapUITests;
+			sourceTree = "<group>";
+		};
+		4CB1F7421BE1233200BEC607 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4CB1F7431BE1238300BEC607 /* UDACityClient.swift */,
+				4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */,
+				4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,9 +280,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */,
+				4CB1F7461BE123C500BEC607 /* UDACityConstants.swift in Sources */,
 				38B4DEAC1BDCF1A20021B9C4 /* SecondViewController.swift in Sources */,
+				4CB1F7441BE1238300BEC607 /* UDACityClient.swift in Sources */,
 				38B4DEA81BDCF1A20021B9C4 /* AppDelegate.swift in Sources */,
 				38B4DEAA1BDCF1A20021B9C4 /* FirstViewController.swift in Sources */,
+				4CB1F7481BE1251000BEC607 /* UDACityConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +510,7 @@
 				38B4DED01BDCF1A20021B9C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38B4DED11BDCF1A20021B9C4 /* Build configuration list for PBXNativeTarget "UDACity_on_the_mapTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +519,7 @@
 				38B4DED31BDCF1A20021B9C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38B4DED41BDCF1A20021B9C4 /* Build configuration list for PBXNativeTarget "UDACity_on_the_mapUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +528,7 @@
 				38B4DED61BDCF1A20021B9C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
