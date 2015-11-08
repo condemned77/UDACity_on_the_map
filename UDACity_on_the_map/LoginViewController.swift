@@ -27,7 +27,21 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonTouchUpInside(sender: UIButton) {
         self.udacityClient.password = self.passwordTextField.text
         self.udacityClient.userName = self.emailTextField.text
-        self.udacityClient.getSessionID()
+        self.udacityClient.loginToUDACity() {
+            (success, errorString) in
+            
+            if success {
+                self.completeLogin()
+            }
+        }
+    }
+    
+    //MARK: here the tab viewcontroller should be pushed!
+    func completeLogin() {
+        dispatch_async(dispatch_get_main_queue(), {
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabbarController") as! MapTabbarController
+            self.presentViewController(controller, animated: true, completion: nil)
+        })
     }
 
     func applyGradientToBackground() {
