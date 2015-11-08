@@ -11,5 +11,5 @@ import UIKit
 
 class MapTabbarController : UITabBarController {
     
-    
+    var studentLocations : [ParseAPIClient.StudentMapData] = []
 }
