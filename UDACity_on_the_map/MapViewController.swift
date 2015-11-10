@@ -12,8 +12,11 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var map: MKMapView!
-    var parseAPIClient : ParseAPIClient
-    var mapTabbarController : MapTabbarController?
+    var mapTabbarController : MapTabbarController? {
+        get {
+            return self.tabBarController as? MapTabbarController
+        }
+    }
     
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
 //        self.parseAPIClient = ParseAPIClient()
@@ -21,13 +24,11 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 //    }
     
     required init?(coder aDecoder: NSCoder) {
-        self.parseAPIClient = ParseAPIClient()
         super.init(coder: aDecoder)
-        self.mapTabbarController = self.tabBarController as? MapTabbarController
     }
     
     
-    /*Process: when the map is loaded, the following process shall be handled in this method:
+    /*When the map is loaded, the following process shall be handled in this method:
     1. load relevant student location data from the parseAPI.
     2. make sure  the data is valid (guards)
     3. create pins for the map (MKPointAnnotaion)
@@ -39,24 +40,27 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             self.loadStudentLocationsToMap()
         })
     }
-    
+
     
     func loadStudentLocationsToMap() {
-        parseAPIClient.requestStudentLocation() {
-            (json_data, error) in
-            
-            guard let json_dict = json_data as? NSDictionary else {print("couldn't cast json data"); return}
-            guard let student_list = json_dict["results"] as? [NSDictionary] else {print("couldn't find student data"); return}
-            
-            for student in student_list {
-                let student_struct : ParseAPIClient.StudentMapData = ParseAPIClient.createPinAnnotation(with: student)
-                (self.tabBarController as! MapTabbarController).studentLocations.append(student_struct)
-                let pin_annotation = self.createPinAnnotation(fromStudentMapData: student_struct)
-                self.map.addAnnotation(pin_annotation)
-            }
+        self.mapTabbarController!.requestStudentLocation() {
+            (studentLocations, error) in
+            guard error == nil else {print("error while download student locations: \(error)"); return}
+            self.refreshStudentLocations(with: studentLocations)
         }
     }
     
+    
+    func refreshStudentLocations(with studentLocations : [ParseAPIClient.StudentMapData]) {
+        dispatch_async(dispatch_get_main_queue(), {
+        self.map.removeAnnotations(self.map.annotations)
+            for student_struct in studentLocations {
+                let pin_annotation = self.createPinAnnotation(fromStudentMapData: student_struct)
+                self.map.addAnnotation(pin_annotation)
+            }
+        })
+    }
+
     
     func createPinAnnotation(fromStudentMapData studentMapData :  ParseAPIClient.StudentMapData) -> MKPointAnnotation {
         // The lat and long are used to create a CLLocationCoordinates2D instance.

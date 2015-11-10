@@ -13,7 +13,7 @@ class ParseAPIClient: NSObject {
       The student location data is passed to the completion handler argument, which
       has to process the received data.
     */
-    func requestStudentLocation(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func requestStudentLocation(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: ParseAPIConstants.URLs.STUDENTLOCATION)!)
         request.addValue(ParseAPIConstants.APPLICATION_ID, forHTTPHeaderField: "X-Parse-Application-Id")

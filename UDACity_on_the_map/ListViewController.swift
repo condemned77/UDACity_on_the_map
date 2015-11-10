@@ -51,4 +51,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func openURLInSafari(url : String) {
         UIApplication.sharedApplication().openURL(NSURL(string: url)!)
     }
+    
+    
+    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+        
+        
+    }
 }
