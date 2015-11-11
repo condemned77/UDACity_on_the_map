@@ -28,6 +28,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
+    override func viewDidAppear(animated: Bool) {
+        print("Map view did appear")
+        self.loadStudentLocationsToMap()
+    }
+    
+    
     /*When the map is loaded, the following process shall be handled in this method:
     1. load relevant student location data from the parseAPI.
     2. make sure  the data is valid (guards)
@@ -36,9 +42,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.map.delegate = self
-        dispatch_async(dispatch_get_main_queue(), {
-            self.loadStudentLocationsToMap()
-        })
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self.loadStudentLocationsToMap()
+//        })
     }
 
     
@@ -59,6 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 self.map.addAnnotation(pin_annotation)
             }
         })
+        print("refreshed map pins")
     }
 
     

@@ -12,12 +12,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var mapPinTableView: UITableView!
     var studentLocations : [ParseAPIClient.StudentMapData]?
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.studentLocations = (self.tabBarController as! MapTabbarController).studentLocations
     }
 
+    override func viewDidAppear(animated: Bool) {
+        print("list view did appear")
+        self.refreshStudentLocations()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,6 +49,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return self.studentLocations!.count
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let url = self.studentLocations![indexPath.row].mediaURL
         self.openURLInSafari(url)
@@ -53,8 +61,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func refreshStudentLocations() {
+        self.tableView.reloadData()
+        print("refreshed list")
+    }
+    
+    
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
-        
-        
+        self.refreshStudentLocations()
     }
 }
