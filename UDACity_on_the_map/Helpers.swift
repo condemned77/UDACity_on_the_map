@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Helpers {
     /* Helper: Given raw JSON, return a usable Foundation object */

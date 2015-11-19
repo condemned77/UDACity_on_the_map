@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
 //        self.applyGradientToBackground()
+        self.passwordTextField.delegate = CommonTextFieldDelegate.sharedInstance()
+        self.emailTextField.delegate    = CommonTextFieldDelegate.sharedInstance()
     }
     
 
@@ -29,20 +31,23 @@ class LoginViewController: UIViewController {
         self.udacityClient.userName = self.emailTextField.text
         self.udacityClient.loginToUDACity() {
             (success, errorString) in
-            
+
             if success {
                 self.completeLogin()
+            } else {
+                //todo show alert view
             }
         }
     }
     
-    //MARK: here the tab viewcontroller should be pushed!
+    //Present the tabbar controller when login was successful.
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabbarController") as! MapTabbarController
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
+
 
     func applyGradientToBackground() {
         let gradient: CAGradientLayer = CAGradientLayer()
