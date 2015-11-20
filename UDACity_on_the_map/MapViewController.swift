@@ -18,11 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     }
     
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-//        self.parseAPIClient = ParseAPIClient()
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//    }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -49,17 +45,23 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 
     
     func loadStudentLocationsToMap() {
-        self.mapTabbarController!.requestStudentLocation() {
+        ParseAPIClient.requestStudentLocation() {
             (studentLocations, error) in
-            guard error == nil else {print("error while download student locations: \(error)"); return}
-            self.refreshStudentLocations(with: studentLocations)
+            guard error == nil else {
+                print("error while download student locations: \(error)");
+                Helpers.showAlertView(withMessage: "Error while downloading student locations", fromViewController: self)
+                return
+            }
+            self.refreshMap(with: studentLocations)
         }
     }
     
-    
-    func refreshStudentLocations(with studentLocations : [ParseAPIClient.StudentMapData]) {
+
+    /*This method refreshes the map pins with the information passed in as
+    argument*/
+    func refreshMap(with studentLocations : [ParseAPIClient.StudentMapData]) {
         dispatch_async(dispatch_get_main_queue(), {
-        self.map.removeAnnotations(self.map.annotations)
+            self.map.removeAnnotations(self.map.annotations)
             for student_struct in studentLocations {
                 let pin_annotation = self.createPinAnnotation(fromStudentMapData: student_struct)
                 self.map.addAnnotation(pin_annotation)
@@ -114,6 +116,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     }
 
+    @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
+    }
     
     @IBAction func pinButtonPressed (sender: UIBarButtonItem) {
         

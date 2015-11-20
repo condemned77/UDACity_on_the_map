@@ -9,11 +9,36 @@
 import Foundation
 
 class ParseAPIClient: NSObject {
+
+    static var studentLocations : [StudentMapData] = []
+
+    static func requestStudentLocation(completionHandler: (studentLocations : [ParseAPIClient.StudentMapData]!, error: NSError?) -> Void) {
+
+        self.POSTLocationRequest() {
+            (json_data, error) in
+            guard let json_dict = json_data as? NSDictionary else {print("couldn't cast json data"); return}
+            guard let student_list = json_dict["results"] as? [NSDictionary] else {print("couldn't find student data"); return}
+
+
+            for student in student_list {
+                let student_struct : ParseAPIClient.StudentMapData = ParseAPIClient.createPinAnnotation(with: student)
+                addStudentData(student_struct)
+            }
+            completionHandler(studentLocations: ParseAPIClient.studentLocations, error: nil)
+        }
+
+    }
+
+    
+    static func addStudentData(student_struct : StudentMapData) {
+        studentLocations.append(student_struct)
+    }
+
     /*Convenience method that requests the student location data.
       The student location data is passed to the completion handler argument, which
       has to process the received data.
     */
-    static func requestStudentLocation(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+    static func POSTLocationRequest(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: ParseAPIConstants.URLs.STUDENTLOCATION)!)
         request.addValue(ParseAPIConstants.APPLICATION_ID, forHTTPHeaderField: "X-Parse-Application-Id")

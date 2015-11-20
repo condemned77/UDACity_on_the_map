@@ -40,9 +40,8 @@ extension UDACityClient {
 
         let task = self.taskForPOSTMethod(URLs.SESSION_ID_URL, jsonBody: body_params) {
             (result, error) in
-        
+            guard error == nil else {completionHandler(success: false, errorString: "error: \(error!.domain) \n with error code: \(error!.code)"); return}
             if let result_dict : NSDictionary = result as? NSDictionary {
-                
                 print(result_dict)
                 if let session_value_dict = result_dict["session"] as? NSDictionary {
                     if let session_id = session_value_dict["id"] as? String {
@@ -50,12 +49,10 @@ extension UDACityClient {
                         completionHandler(success: true, errorString: nil)
                     }
                 }
+            } else {
+                completionHandler(success: false, errorString: "The HTTP response couldn't be read.")
             }
         }
         task.start()
     }
 }
-
-
-
-    

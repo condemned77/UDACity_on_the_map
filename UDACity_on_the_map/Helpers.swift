@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 struct Helpers {
-    /* Helper: Given raw JSON, return a usable Foundation object */
+    /* Helper: Given raw JSON, the method provides a usable Foundation object by passing it to the 
+    completion handler.*/
     static func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         var parsedResult: AnyObject!
@@ -22,5 +23,15 @@ struct Helpers {
         }
         
         completionHandler(result: parsedResult, error: nil)
+    }
+
+    /*This method presents and alertview with the passed message from a view controller, also passed as argument.*/
+    static func showAlertView(withMessage errorMessage : String, fromViewController vc : UIViewController) {
+        let alertController = UIAlertController(title: "Login Error", message: errorMessage, preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(OKAction)
+        dispatch_async(dispatch_get_main_queue(), {
+            vc.presentViewController(alertController, animated: true, completion: nil)
+        })
     }
 }

@@ -66,18 +66,24 @@ class UDACityClient {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
 
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                var loginError : NSError? = nil
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    loginError = NSError(domain: "wrong user name or password", code: response.statusCode, userInfo: nil)
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
+                    loginError = NSError(domain: "Your request returned an invalid response", code: -1, userInfo: nil)
                 } else {
-                    print("Your request returned an invalid response!")
+                    print("An unknown error occurred")
+                    loginError = NSError(domain: "An unknown error occurred", code: -1, userInfo: nil)
                 }
+                completionHandler(result: response, error: loginError)
                 return
             }
             let newData = data?.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */

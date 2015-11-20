@@ -10,16 +10,9 @@ import UIKit
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var mapPinTableView: UITableView!
-    var studentLocations : [ParseAPIClient.StudentMapData]?
-    
+
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.studentLocations = (self.tabBarController as! MapTabbarController).studentLocations
-    }
-
     override func viewDidAppear(animated: Bool) {
         print("list view did appear")
         self.refreshStudentLocations()
@@ -38,7 +31,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cell == nil {
             cell = UITableViewCell()
         }
-        let studentName = "\(self.studentLocations![indexPath.row].firstName) \(self.studentLocations![indexPath.row].lastName)"
+        let studentName = "\(ParseAPIClient.studentLocations[indexPath.row].firstName) \(ParseAPIClient.studentLocations[indexPath.row].lastName)"
         cell!.textLabel?.text = studentName
         
         return cell!
@@ -46,12 +39,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.studentLocations!.count
+        return ParseAPIClient.studentLocations.count
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let url = self.studentLocations![indexPath.row].mediaURL
+        let url = ParseAPIClient.studentLocations[indexPath.row].mediaURL
         self.openURLInSafari(url)
     }
     
@@ -62,11 +55,20 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func refreshStudentLocations() {
+        ParseAPIClient.requestStudentLocation() {
+            (studentLocations, error) in
+            guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self); return}
+        }
         self.tableView.reloadData()
         print("refreshed list")
     }
     
+
     
+    @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         self.refreshStudentLocations()
     }

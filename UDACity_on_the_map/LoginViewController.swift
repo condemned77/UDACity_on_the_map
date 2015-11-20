@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UIAlertViewDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -29,17 +29,34 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonTouchUpInside(sender: UIButton) {
         self.udacityClient.password = self.passwordTextField.text
         self.udacityClient.userName = self.emailTextField.text
+        if self.udacityClient.password == "" {
+            Helpers.showAlertView(withMessage: "You didn't enter a password!", fromViewController: self)
+        }
+
+        else if self.udacityClient.userName == "" {
+            Helpers.showAlertView(withMessage: "You didn't enter a user name!", fromViewController: self)
+        }
+        else {
+            self.startLoginProcess()
+        }
+    }
+
+
+    func startLoginProcess() {
         self.udacityClient.loginToUDACity() {
             (success, errorString) in
 
             if success {
                 self.completeLogin()
             } else {
-                //todo show alert view
+                //show alert view
+                Helpers.showAlertView(withMessage: errorString!, fromViewController: self)
             }
         }
     }
-    
+
+
+
     //Present the tabbar controller when login was successful.
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
