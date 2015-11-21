@@ -45,11 +45,11 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 
     
     func loadStudentLocationsToMap() {
-        ParseAPIClient.requestStudentLocation() {
+        ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
             guard error == nil else {
                 print("error while download student locations: \(error)");
-                Helpers.showAlertView(withMessage: "Error while downloading student locations", fromViewController: self)
+                Helpers.showAlertView(withMessage: "Error while downloading student locations", fromViewController: self, withCompletionHandler: nil)
                 return
             }
             self.refreshMap(with: studentLocations)
@@ -117,6 +117,16 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
 
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
+        UDACityClient.sharedInstance().logoutFromUDACitySession() {
+            (success, error) in
+            guard error == nil else {
+                Helpers.showAlertView(withMessage: error!.domain, fromViewController: self) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                return
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func pinButtonPressed (sender: UIBarButtonItem) {

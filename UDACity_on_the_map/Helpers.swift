@@ -26,12 +26,12 @@ struct Helpers {
     }
 
     /*This method presents and alertview with the passed message from a view controller, also passed as argument.*/
-    static func showAlertView(withMessage errorMessage : String, fromViewController vc : UIViewController) {
+    static func showAlertView(withMessage errorMessage : String, fromViewController vc : UIViewController, withCompletionHandler ch: (() -> Void)?) {
         let alertController = UIAlertController(title: "Login Error", message: errorMessage, preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(OKAction)
         dispatch_async(dispatch_get_main_queue(), {
-            vc.presentViewController(alertController, animated: true, completion: nil)
+            vc.presentViewController(alertController, animated: true, completion: ch)
         })
     }
 }

@@ -19,6 +19,11 @@ extension UDACityClient {
         static let SESSION_ID_URL : String = "https://www.udacity.com/api/session"
     }
     
+    struct Methods {
+        static let DELETE   : String = "DELETE"
+        static let POST     : String = "POST"
+    }
+    
     struct Requests{
         static let USERNAME : String = "username"
         static let PASSWORD : String = "password"

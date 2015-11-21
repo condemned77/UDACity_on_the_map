@@ -55,9 +55,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func refreshStudentLocations() {
-        ParseAPIClient.requestStudentLocation() {
+        ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
-            guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self); return}
+            guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self, withCompletionHandler: nil); return}
         }
         self.tableView.reloadData()
         print("refreshed list")
@@ -66,8 +66,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        UDACityClient.sharedInstance().logoutFromUDACitySession() {
+            (success, error) in
+            guard error == nil else {
+                Helpers.showAlertView(withMessage: error!.domain, fromViewController: self) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                return
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
+
 
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         self.refreshStudentLocations()

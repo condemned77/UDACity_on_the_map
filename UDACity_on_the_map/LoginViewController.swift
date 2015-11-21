@@ -30,11 +30,11 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         self.udacityClient.password = self.passwordTextField.text
         self.udacityClient.userName = self.emailTextField.text
         if self.udacityClient.password == "" {
-            Helpers.showAlertView(withMessage: "You didn't enter a password!", fromViewController: self)
+            Helpers.showAlertView(withMessage: "You didn't enter a password!", fromViewController: self, withCompletionHandler: nil)
         }
 
         else if self.udacityClient.userName == "" {
-            Helpers.showAlertView(withMessage: "You didn't enter a user name!", fromViewController: self)
+            Helpers.showAlertView(withMessage: "You didn't enter a user name!", fromViewController: self, withCompletionHandler: nil)
         }
         else {
             self.startLoginProcess()
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
                 self.completeLogin()
             } else {
                 //show alert view
-                Helpers.showAlertView(withMessage: errorString!, fromViewController: self)
+                Helpers.showAlertView(withMessage: errorString!, fromViewController: self, withCompletionHandler: nil)
             }
         }
     }
@@ -63,6 +63,11 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabbarController") as! MapTabbarController
             self.presentViewController(controller, animated: true, completion: nil)
         })
+    }
+    
+    func clearTextFields() {
+        self.passwordTextField.text! = ""
+        self.emailTextField.text! = ""
     }
 
 

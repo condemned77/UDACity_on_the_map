@@ -17,8 +17,12 @@ extension NSURLSessionTask {
 extension UDACityClient {
     
     
-    func loginToUDACity(completionHanlder : (success : Bool, errorString : String?) -> Void) {
-        self.getSessionID(completionHanlder)
+    func loginToUDACity(completionHandler : (success : Bool, errorString : String?) -> Void) {
+        self.getSessionID(completionHandler)
+    }
+    
+    func logoutFromUDACitySession(completionHandler: (success : Bool, error : NSError?) -> Void) {
+        self.deleteUDACitySession(completionHandler)
     }
     
 //convenience method for requesting the UDACity sessionID. Relies user name and password being stored within respective properties.

@@ -53,7 +53,7 @@ class UDACityClient {
 
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = Methods.POST
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
@@ -102,6 +102,48 @@ class UDACityClient {
 
         return task
     }
+    
+    
+    func deleteUDACitySession(completionHandler: (success : Bool, error : NSError?) -> Void ){
+    
+        let request = NSMutableURLRequest(URL: NSURL(string: URLs.SESSION_ID_URL)!)
+        
+        request.HTTPMethod = Methods.DELETE
+        
+        var xsrfCookie: NSHTTPCookie? = nil
+        
+        let sharedCookieStorage : NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+
+        if let cookies : [NSHTTPCookie] = sharedCookieStorage.cookies {
+            for cookie in cookies {
+                if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+            }
+        }
+
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            guard error == nil else {
+                let error : NSError = NSError(domain: "Coudln't connect to \(URLs.SESSION_ID_URL) for logout", code: -1, userInfo: nil)
+                completionHandler(success: false, error: error)
+                return
+            }
+            
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            completionHandler(success: true, error: nil)
+            return
+        }
+        
+        task.start()
+    }
+
 
     // MARK: Shared Instance
 
