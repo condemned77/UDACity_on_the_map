@@ -129,8 +129,8 @@ class UDACityClient {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             guard error == nil else {
-                let error : NSError = NSError(domain: "Coudln't connect to \(URLs.SESSION_ID_URL) for logout", code: -1, userInfo: nil)
-                completionHandler(success: false, error: error)
+                let appError : NSError = NSError(domain: "Coudln't connect to \(URLs.SESSION_ID_URL) for logout. Error: \(error)", code: (error?.code)!, userInfo: nil)
+                completionHandler(success: false, error: appError)
                 return
             }
             

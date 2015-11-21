@@ -60,4 +60,35 @@ class ParseAPIClient: NSObject {
         
         task.start()
     }
+    
+    
+    func addStudentLocationToParseAPI(studentStruct : StudentMapData, completionHanlder: (success : Bool, error : NSError?) -> Void) -> Void {
+        let request = NSMutableURLRequest(URL: NSURL(string: ParseAPIConstants.URLs.STUDENTLOCATION)!)
+        
+        request.HTTPMethod = UDACityClient.Methods.POST
+        
+        request.addValue(ParseAPIConstants.APPLICATION_ID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseAPIConstants.REST_API_Key, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.HTTPBody = "{\"uniqueKey\": \"\(studentStruct.uniqueKey)\", \"firstName\": \"\(studentStruct.firstName)\", \"lastName\": \"\(studentStruct.lastName)\",\"mapString\": \"\(studentStruct.mapString)\", \"mediaURL\": \"\(studentStruct.mediaURL)\",\"latitude\": \(studentStruct.latitude), \"longitude\": \(studentStruct.longitude)}".dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            guard error == nil else{ // Handle error…
+                let appError : NSError = NSError(domain: "couldn't post student location. Received error from server: \(error)", code: (error?.code)!, userInfo: nil)
+                completionHanlder(success: false, error: appError)
+                return
+                
+            }
+            
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+        }
+        
+        task.resume()
+    }
 }
