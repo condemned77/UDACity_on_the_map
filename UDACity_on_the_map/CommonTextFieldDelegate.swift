@@ -12,8 +12,7 @@ import UIKit
 
 
 class CommonTextFieldDelegate: NSObject, UITextFieldDelegate {
-    static var commonTextFieldDelegate : CommonTextFieldDelegate?
-
+ 
     //Callback method when enter is pressed => end editing the textfield in this case
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return textField.endEditing(true)
@@ -21,9 +20,10 @@ class CommonTextFieldDelegate: NSObject, UITextFieldDelegate {
 
 
     static func sharedInstance() -> CommonTextFieldDelegate{
-        if nil == CommonTextFieldDelegate.commonTextFieldDelegate {
-            CommonTextFieldDelegate.commonTextFieldDelegate = CommonTextFieldDelegate()
+        struct Singleton {
+            static var sharedInstance = CommonTextFieldDelegate()
         }
-        return CommonTextFieldDelegate.commonTextFieldDelegate!
+
+        return Singleton.sharedInstance
     }
 }
