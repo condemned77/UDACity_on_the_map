@@ -67,18 +67,19 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 self.map.addAnnotation(pin_annotation)
             }
         })
+        
         print("refreshed map pins")
     }
 
     
     func createPinAnnotation(fromStudentMapData studentMapData :  ParseAPIClient.StudentMapData) -> MKPointAnnotation {
         // The lat and long are used to create a CLLocationCoordinates2D instance.
-        let coordinate = CLLocationCoordinate2D(latitude: studentMapData.latitude, longitude: studentMapData.longitude)
+        let coordinate = CLLocationCoordinate2D(latitude: studentMapData.latitude!, longitude: studentMapData.longitude!)
         
         // Here we create the annotation and set its coordiate, title, and subtitle properties
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "\(studentMapData.firstName) \(studentMapData.lastName)"
+        annotation.title = "\(studentMapData.firstName!) \(studentMapData.lastName!)"
         annotation.subtitle = studentMapData.mediaURL
         
         return annotation
@@ -110,8 +111,11 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
         if control == annotationView.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
-            if let urlString = annotationView.annotation?.subtitle {
-                app.openURL(NSURL(string: urlString!)!)
+            if var urlString = annotationView.annotation?.subtitle! {
+                if urlString.containsString("http://") == false {
+                    urlString = "http://\(urlString)"
+                }
+                app.openURL(NSURL(string: urlString)!)
             }
         }
     }

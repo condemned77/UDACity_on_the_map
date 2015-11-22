@@ -8,9 +8,12 @@
 
 import Foundation
 class UDACityClient {
-    var userName : String?
-    var password : String?
-    var sessionID: String?
+    var firstName           : String?
+    var lastName            : String?
+    var userName            : String?
+    var password            : String?
+    var sessionID           : String?
+    var udaCityAccountID    : String?
 
     /* Helper function: Given a dictionary of parameters, convert to a string for a url */
     class func escapedParameters(parameters: [String : AnyObject]) -> String {

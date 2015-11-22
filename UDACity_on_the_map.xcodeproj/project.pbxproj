@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38084F4C1BE56E52004C413D /* ParseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084F4B1BE56E52004C413D /* ParseAPIClient.swift */; };
+		38084F4E1BE56E68004C413D /* ParseAPIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084F4D1BE56E68004C413D /* ParseAPIConstants.swift */; };
+		38084F501BE671D0004C413D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38084F4F1BE671D0004C413D /* MapKit.framework */; };
+		38084F521BE688F8004C413D /* ParseAPIMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084F511BE688F8004C413D /* ParseAPIMapData.swift */; };
+		38084F541BE6AB2E004C413D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084F531BE6AB2E004C413D /* Helpers.swift */; };
+		38084F561BEA76C7004C413D /* MapTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38084F551BEA76C7004C413D /* MapTabbarController.swift */; };
+		382F8DD41BF3D2F500E2D0E0 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F8DD31BF3D2F500E2D0E0 /* InformationPostingViewController.swift */; };
+		387CC4201BFB3C5B0063C9A5 /* CommonTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387CC41F1BFB3C5B0063C9A5 /* CommonTextFieldDelegate.swift */; };
 		38B4DEA81BDCF1A20021B9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEA71BDCF1A20021B9C4 /* AppDelegate.swift */; };
-		38B4DEAA1BDCF1A20021B9C4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEA91BDCF1A20021B9C4 /* FirstViewController.swift */; };
-		38B4DEAC1BDCF1A20021B9C4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEAB1BDCF1A20021B9C4 /* SecondViewController.swift */; };
+		38B4DEAA1BDCF1A20021B9C4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEA91BDCF1A20021B9C4 /* MapViewController.swift */; };
+		38B4DEAC1BDCF1A20021B9C4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEAB1BDCF1A20021B9C4 /* ListViewController.swift */; };
 		38B4DEAF1BDCF1A20021B9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B4DEAD1BDCF1A20021B9C4 /* Main.storyboard */; };
 		38B4DEB11BDCF1A20021B9C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B4DEB01BDCF1A20021B9C4 /* Assets.xcassets */; };
 		38B4DEB41BDCF1A20021B9C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B4DEB21BDCF1A20021B9C4 /* LaunchScreen.storyboard */; };
 		38B4DEBF1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEBE1BDCF1A20021B9C4 /* UDACity_on_the_mapTests.swift */; };
 		38B4DECA1BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */; };
 		38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */; };
+		38B4DEDB1BE2859C0021B9C4 /* UDACityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DED91BE2859C0021B9C4 /* UDACityConvenience.swift */; };
+		38B4DEDC1BE2859C0021B9C4 /* UDACityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B4DEDA1BE2859C0021B9C4 /* UDACityConstants.swift */; };
 		4CB1F7441BE1238300BEC607 /* UDACityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7431BE1238300BEC607 /* UDACityClient.swift */; };
-		4CB1F7461BE123C500BEC607 /* UDACityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */; };
-		4CB1F7481BE1251000BEC607 /* UDACityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,10 +47,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38084F4B1BE56E52004C413D /* ParseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIClient.swift; sourceTree = "<group>"; };
+		38084F4D1BE56E68004C413D /* ParseAPIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIConstants.swift; sourceTree = "<group>"; };
+		38084F4F1BE671D0004C413D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		38084F511BE688F8004C413D /* ParseAPIMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIMapData.swift; sourceTree = "<group>"; };
+		38084F531BE6AB2E004C413D /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		38084F551BEA76C7004C413D /* MapTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTabbarController.swift; sourceTree = "<group>"; };
+		382F8DD31BF3D2F500E2D0E0 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		387CC41F1BFB3C5B0063C9A5 /* CommonTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTextFieldDelegate.swift; sourceTree = "<group>"; };
 		38B4DEA41BDCF1A20021B9C4 /* UDACity_on_the_map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UDACity_on_the_map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B4DEA71BDCF1A20021B9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		38B4DEA91BDCF1A20021B9C4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		38B4DEAB1BDCF1A20021B9C4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		38B4DEA91BDCF1A20021B9C4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		38B4DEAB1BDCF1A20021B9C4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		38B4DEAE1BDCF1A20021B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38B4DEB01BDCF1A20021B9C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38B4DEB31BDCF1A20021B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,9 +70,9 @@
 		38B4DEC91BDCF1A20021B9C4 /* UDACity_on_the_mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDACity_on_the_mapUITests.swift; sourceTree = "<group>"; };
 		38B4DECB1BDCF1A20021B9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		38B4DED91BE2859C0021B9C4 /* UDACityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDACityConvenience.swift; path = Model/UDACityConvenience.swift; sourceTree = "<group>"; };
+		38B4DEDA1BE2859C0021B9C4 /* UDACityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDACityConstants.swift; path = Model/UDACityConstants.swift; sourceTree = "<group>"; };
 		4CB1F7431BE1238300BEC607 /* UDACityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDACityClient.swift; path = Model/UDACityClient.swift; sourceTree = "<group>"; };
-		4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDACityConstants.swift; sourceTree = "<group>"; };
-		4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDACityConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38084F501BE671D0004C413D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +104,7 @@
 		38B4DE9B1BDCF1A20021B9C4 = {
 			isa = PBXGroup;
 			children = (
+				38084F4F1BE671D0004C413D /* MapKit.framework */,
 				38B4DEA61BDCF1A20021B9C4 /* UDACity_on_the_map */,
 				38B4DEBD1BDCF1A20021B9C4 /* UDACity_on_the_mapTests */,
 				38B4DEC81BDCF1A20021B9C4 /* UDACity_on_the_mapUITests */,
@@ -109,13 +127,15 @@
 			children = (
 				4CB1F7421BE1233200BEC607 /* Model */,
 				38B4DEA71BDCF1A20021B9C4 /* AppDelegate.swift */,
-				38B4DEA91BDCF1A20021B9C4 /* FirstViewController.swift */,
-				38B4DEAB1BDCF1A20021B9C4 /* SecondViewController.swift */,
+				38B4DEA91BDCF1A20021B9C4 /* MapViewController.swift */,
+				38B4DEAB1BDCF1A20021B9C4 /* ListViewController.swift */,
 				38B4DEAD1BDCF1A20021B9C4 /* Main.storyboard */,
 				38B4DEB01BDCF1A20021B9C4 /* Assets.xcassets */,
 				38B4DEB21BDCF1A20021B9C4 /* LaunchScreen.storyboard */,
 				38B4DEB51BDCF1A20021B9C4 /* Info.plist */,
 				38B4DED71BDCF5170021B9C4 /* LoginViewController.swift */,
+				38084F551BEA76C7004C413D /* MapTabbarController.swift */,
+				382F8DD31BF3D2F500E2D0E0 /* InformationPostingViewController.swift */,
 			);
 			path = UDACity_on_the_map;
 			sourceTree = "<group>";
@@ -141,9 +161,14 @@
 		4CB1F7421BE1233200BEC607 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				38B4DED91BE2859C0021B9C4 /* UDACityConvenience.swift */,
+				38B4DEDA1BE2859C0021B9C4 /* UDACityConstants.swift */,
 				4CB1F7431BE1238300BEC607 /* UDACityClient.swift */,
-				4CB1F7471BE1251000BEC607 /* UDACityConvenience.swift */,
-				4CB1F7451BE123C500BEC607 /* UDACityConstants.swift */,
+				38084F4B1BE56E52004C413D /* ParseAPIClient.swift */,
+				38084F4D1BE56E68004C413D /* ParseAPIConstants.swift */,
+				38084F511BE688F8004C413D /* ParseAPIMapData.swift */,
+				38084F531BE6AB2E004C413D /* Helpers.swift */,
+				387CC41F1BFB3C5B0063C9A5 /* CommonTextFieldDelegate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -280,12 +305,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B4DED81BDCF5170021B9C4 /* LoginViewController.swift in Sources */,
-				4CB1F7461BE123C500BEC607 /* UDACityConstants.swift in Sources */,
-				38B4DEAC1BDCF1A20021B9C4 /* SecondViewController.swift in Sources */,
+				38084F561BEA76C7004C413D /* MapTabbarController.swift in Sources */,
+				38B4DEDC1BE2859C0021B9C4 /* UDACityConstants.swift in Sources */,
+				38084F521BE688F8004C413D /* ParseAPIMapData.swift in Sources */,
+				382F8DD41BF3D2F500E2D0E0 /* InformationPostingViewController.swift in Sources */,
+				38B4DEAC1BDCF1A20021B9C4 /* ListViewController.swift in Sources */,
+				38084F541BE6AB2E004C413D /* Helpers.swift in Sources */,
+				38084F4C1BE56E52004C413D /* ParseAPIClient.swift in Sources */,
 				4CB1F7441BE1238300BEC607 /* UDACityClient.swift in Sources */,
+				38084F4E1BE56E68004C413D /* ParseAPIConstants.swift in Sources */,
 				38B4DEA81BDCF1A20021B9C4 /* AppDelegate.swift in Sources */,
-				38B4DEAA1BDCF1A20021B9C4 /* FirstViewController.swift in Sources */,
-				4CB1F7481BE1251000BEC607 /* UDACityConvenience.swift in Sources */,
+				387CC4201BFB3C5B0063C9A5 /* CommonTextFieldDelegate.swift in Sources */,
+				38B4DEAA1BDCF1A20021B9C4 /* MapViewController.swift in Sources */,
+				38B4DEDB1BE2859C0021B9C4 /* UDACityConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

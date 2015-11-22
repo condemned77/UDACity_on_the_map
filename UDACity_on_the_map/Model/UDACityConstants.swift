@@ -16,7 +16,8 @@ extension UDACityClient {
     }
 
     struct URLs {
-        static let SESSION_ID_URL : String = "https://www.udacity.com/api/session"
+        static let SESSION_ID_URL : String  = "https://www.udacity.com/api/session"
+        static let USER_DATA_URL : String   = "https://www.udacity.com/api/users"
     }
     
     struct Methods {

@@ -37,7 +37,7 @@ extension UDACityClient {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-        request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body_params, options: NSJSONWritingOptions.PrettyPrinted)
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body_params, options: NSJSONWritingOptions.PrettyPrinted)
         } catch {
             print("JSON data couldn't be serialized into http body")
         }
@@ -50,13 +50,48 @@ extension UDACityClient {
                 if let session_value_dict = result_dict["session"] as? NSDictionary {
                     if let session_id = session_value_dict["id"] as? String {
                         self.sessionID = session_id
-                        completionHandler(success: true, errorString: nil)
                     }
                 }
+                
+                if let account_data = result_dict["account"] as? NSDictionary {
+                    if let accountID = account_data["key"] as? String{
+                        self.udaCityAccountID = accountID
+                    }
+                }
+                self.getUserData(withUserID: self.udaCityAccountID!)
+                completionHandler(success: true, errorString: nil)
             } else {
                 completionHandler(success: false, errorString: "The HTTP response couldn't be read.")
             }
         }
         task.start()
+    }
+    
+    func getUserData(withUserID userID : String) {
+        let request = NSMutableURLRequest(URL: NSURL(string: URLs.USER_DATA_URL + "/\(userID)")!)
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            Helpers.parseJSONWithCompletionHandler(newData) {
+                result, error in
+                if let json = result as? Dictionary<String, AnyObject!>  {
+                    if let userData = json["user"] as? Dictionary<String, AnyObject> {
+                        self.firstName  = userData["first_name"] as? String
+                        self.lastName   = userData["last_name"] as? String
+
+                    }
+                }
+            }
+            
+        }
+        
+        task.resume()
     }
 }

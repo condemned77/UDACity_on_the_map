@@ -15,7 +15,7 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
 
-    let udacityClient : UDACityClient = UDACityClient()
+    let udacityClient : UDACityClient = UDACityClient.sharedInstance()
 
 
     override func viewDidLoad() {
@@ -77,5 +77,11 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         gradient.colors = [UIColor.whiteColor().CGColor, UIColor.orangeColor().CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 0)
 
+    }
+    
+    
+    @IBAction func createAccountButtonPressed(sender: AnyObject) {
+        let udacityURL : NSURL = NSURL(string: "https://udacity.com")!
+        UIApplication.sharedApplication().openURL(udacityURL)
     }
 }

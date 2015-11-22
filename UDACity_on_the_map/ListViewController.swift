@@ -44,7 +44,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let url = ParseAPIClient.studentLocations[indexPath.row].mediaURL
+        let url = ParseAPIClient.studentLocations[indexPath.row].mediaURL!
         self.openURLInSafari(url)
     }
     
