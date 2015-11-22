@@ -12,6 +12,8 @@ class ParseAPIClient: NSObject {
 
     static var studentLocations : [StudentMapData] = []
 
+    /*Requesting the student locations sends a post request to the ParseAPI. The method processes the student information gotten as
+    response by building student structs and storing them into the static variable studentLocations.*/
     static func requestStudentLocations(completionHandler: (studentLocations : [ParseAPIClient.StudentMapData]!, error: NSError?) -> Void) {
         deleteStudentData()
         POSTLocationRequest() {
@@ -29,11 +31,12 @@ class ParseAPIClient: NSObject {
 
     }
 
-    
+    /*convenience method for clearing the currenlty stored student structs in the static variable studentLocations*/
     static func deleteStudentData() {
         studentLocations = []
     }
     
+    /*convenience method for disguising the underlying data repository.*/
     static func addStudentData(student_struct : StudentMapData) {
         studentLocations.append(student_struct)
     }
@@ -61,7 +64,13 @@ class ParseAPIClient: NSObject {
         task.start()
     }
     
-    
+    /*Conveniencem method for posting student data to the ParseAPI servers. The method takes a student struct (see ParseAPIMapData.swift),
+    and extracts the relevant information accordingly:
+    1. student's first and last name
+    2. a uniqueKey, which is supposed to be the Udacity account (user) id
+    3. a map string, which corresponds to the location the student wants to set the pin on the map to
+    4. media url, which corresponds to a URL added by the student (the URL will be displayed at the pin on the map)
+    5. coordinates of the pin (longitude and latitude)*/
     static func addStudentLocationToParseAPI(studentStruct : StudentMapData, completionHanlder: (success : Bool, error : NSError?) -> Void) -> Void {
         let request = NSMutableURLRequest(URL: NSURL(string: ParseAPIConstants.URLs.STUDENTLOCATION)!)
         

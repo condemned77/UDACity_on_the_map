@@ -16,16 +16,18 @@ extension NSURLSessionTask {
 
 extension UDACityClient {
     
-    
+    /*login mechanism creates a session on the UDACity servers.*/
     func loginToUDACity(completionHandler : (success : Bool, errorString : String?) -> Void) {
         self.getSessionID(completionHandler)
     }
     
+    /*logout mechanism, deletes the UDACity session from the UDACityAPI servers.*/
     func logoutFromUDACitySession(completionHandler: (success : Bool, error : NSError?) -> Void) {
         self.deleteUDACitySession(completionHandler)
     }
     
-//convenience method for requesting the UDACity sessionID. Relies user name and password being stored within respective properties.
+    /*convenience method for requesting the UDACity sessionID. Relies 
+    on the user name and password being stored within respective properties.*/
     func getSessionID(completionHandler : (success : Bool, errorString : String?) -> Void) {
         
         let body_params = ["udacity": [
@@ -67,6 +69,10 @@ extension UDACityClient {
         task.start()
     }
     
+    
+    /*Convenience method for requsting student information from the UDACity 
+    The relevant information are the student's first and last name, for posting a location
+    to the ParseAPI servers.*/
     func getUserData(withUserID userID : String) {
         let request = NSMutableURLRequest(URL: NSURL(string: URLs.USER_DATA_URL + "/\(userID)")!)
         let session = NSURLSession.sharedSession()
@@ -89,9 +95,7 @@ extension UDACityClient {
                     }
                 }
             }
-            
         }
-        
-        task.resume()
+        task.start()
     }
 }

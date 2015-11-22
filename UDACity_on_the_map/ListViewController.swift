@@ -23,7 +23,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-    
+    /*Callback methdo for populating table view cells.*/
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         var cell = self.mapPinTableView.dequeueReusableCellWithIdentifier("MapPinCell")
@@ -37,23 +37,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell!
     }
     
-    
+    /*Callback method for returning the amount of table rows (corresponds to amount
+    of student locations)*/
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ParseAPIClient.studentLocations.count
     }
     
-    
+    /*Callback method for handling clicks on the table rows.*/
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let url = ParseAPIClient.studentLocations[indexPath.row].mediaURL!
         self.openURLInSafari(url)
     }
     
-    
+    /*Convenience method for opening a URL (as string) in safari.*/
     func openURLInSafari(url : String) {
         UIApplication.sharedApplication().openURL(NSURL(string: url)!)
     }
     
-    
+    /*Uses the ParseAPIClient to request student locations.
+    When location are received, the data is used to refresh the list content.*/
     func refreshStudentLocations() {
         ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
@@ -64,21 +66,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 
+    /*finishing logout by dismissing the viewController from the main thread.*/
+    func finishLogout() {
+        dispatch_async(dispatch_get_main_queue(), { () in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
     
+    
+    /*Logging out of the app, by telling the UDACityClient to logout.
+    Afterwards the view is dismissed and the login view is shown again.*/
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
         UDACityClient.sharedInstance().logoutFromUDACitySession() {
             (success, error) in
             guard error == nil else {
                 Helpers.showAlertView(withMessage: error!.domain, fromViewController: self) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.finishLogout()
                 }
                 return
             }
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.finishLogout()
         }
     }
 
-
+    /*IBAction which refreshes the map data by aclling loadStudentLocationsToMap*/
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         self.refreshStudentLocations()
     }

@@ -25,7 +25,8 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
     }
     
 
-
+    /*Starts the login process by reading the user credentials from the corresponding
+    text fields. User email and password are in properties.*/
     @IBAction func loginButtonTouchUpInside(sender: UIButton) {
         self.udacityClient.password = self.passwordTextField.text
         self.udacityClient.userName = self.emailTextField.text
@@ -41,7 +42,9 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         }
     }
 
-
+    /*This methods starts the login process by telling the UDACity client to login.
+    When the login is sucessfully completed, the map is loaded. Otherwise and alert view will
+    show an error.*/
     func startLoginProcess() {
         self.udacityClient.loginToUDACity() {
             (success, errorString) in
@@ -65,21 +68,8 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         })
     }
     
-    func clearTextFields() {
-        self.passwordTextField.text! = ""
-        self.emailTextField.text! = ""
-    }
-
-
-    func applyGradientToBackground() {
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.orangeColor().CGColor]
-        self.view.layer.insertSublayer(gradient, atIndex: 0)
-
-    }
     
-    
+    /*IBAction method which opens the UDACity website in safari.*/
     @IBAction func createAccountButtonPressed(sender: AnyObject) {
         let udacityURL : NSURL = NSURL(string: "https://udacity.com")!
         UIApplication.sharedApplication().openURL(udacityURL)

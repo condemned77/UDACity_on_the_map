@@ -13,7 +13,7 @@ import UIKit
 
 class CommonTextFieldDelegate: NSObject, UITextFieldDelegate {
  
-    //Callback method when enter is pressed => end editing the textfield in this case
+    //Callback method when enter is pressed => end editing the textfield in this case.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return textField.endEditing(true)
     }

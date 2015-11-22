@@ -23,27 +23,25 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         super.init(coder: aDecoder)
     }
     
-    
+    /*When the map is loaded, the following process shall be handled in this method:
+    1. load relevant student location data from the parseAPI.
+    2. make sure  the data is valid (guards)
+    3. create pins for the map (MKPointAnnotaion)
+    4. Add them to the map instance.*/
+
     override func viewDidAppear(animated: Bool) {
         print("Map view did appear")
         self.loadStudentLocationsToMap()
     }
     
     
-    /*When the map is loaded, the following process shall be handled in this method:
-    1. load relevant student location data from the parseAPI.
-    2. make sure  the data is valid (guards)
-    3. create pins for the map (MKPointAnnotaion)
-    4. Add them to the map instance.*/
     override func viewDidLoad() {
         super.viewDidLoad()
         self.map.delegate = self
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.loadStudentLocationsToMap()
-//        })
     }
 
-    
+    /*Entry method which uses the ParseAPIClient to request student locations.
+    When location are received, the data is used to refresh the map content.*/
     func loadStudentLocationsToMap() {
         ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
@@ -71,7 +69,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         print("refreshed map pins")
     }
 
-    
+
+    /*Convenience method for setting up map pins. A pin contains the student name and last name + a url provided
+    by the student.*/
     func createPinAnnotation(fromStudentMapData studentMapData :  ParseAPIClient.StudentMapData) -> MKPointAnnotation {
         // The lat and long are used to create a CLLocationCoordinates2D instance.
         let coordinate = CLLocationCoordinate2D(latitude: studentMapData.latitude!, longitude: studentMapData.longitude!)
@@ -86,13 +86,13 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
 
     
+    /*Callback method of the MKMapViewDelegate protocol.
+    Here, the visual appearence of the map pins is set.*/
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
+            if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = UIColor.redColor()
@@ -120,22 +120,31 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     }
 
+    /*finishing logout by dismissing the viewController from the main thread.*/
+    func finishLogout() {
+        dispatch_async(dispatch_get_main_queue(), { () in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
+    
+    /*Logging out of the app, by telling the UDACityClient to logout.
+    Afterwards the view is dismissed and the login view is shown again.*/
     @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
         UDACityClient.sharedInstance().logoutFromUDACitySession() {
             (success, error) in
             guard error == nil else {
                 Helpers.showAlertView(withMessage: error!.domain, fromViewController: self) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.finishLogout()
                 }
                 return
             }
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.finishLogout()
         }
     }
     
-    @IBAction func pinButtonPressed (sender: UIBarButtonItem) {
-        
-    }
+    
+    /*IBAction which refreshes the map data by aclling loadStudentLocationsToMap*/
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         self.loadStudentLocationsToMap()
     }

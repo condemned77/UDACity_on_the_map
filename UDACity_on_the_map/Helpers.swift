@@ -36,6 +36,8 @@ struct Helpers {
     }
     
     
+    /*Convenience method for displaying an activity indicator from any view controller.
+    The activity indicator is a shared instance.*/
     static func showActivityIndicator(fromViewController vc : UIViewController) {
         let actInd = Helpers.sharedActivityIndicator()
         actInd.center = vc.view.center
@@ -43,12 +45,15 @@ struct Helpers {
         actInd.startAnimating()
     }
     
+    /*Convenience method for dismissing the activity indicator of the sharedInstance.*/
+
     static func dismissActivityIndicator(fromViewController vc : UIViewController) {
         let actInd = Helpers.sharedActivityIndicator()
         actInd.removeFromSuperview()
         actInd.stopAnimating()
     }
     
+    /*singleton convenience method + setup of activity indicator properties.*/
     static var activityIndicator : UIActivityIndicatorView? = nil
     static func sharedActivityIndicator() -> UIActivityIndicatorView{
         

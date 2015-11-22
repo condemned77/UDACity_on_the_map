@@ -52,6 +52,9 @@ class UDACityClient {
 
 
 
+    /*Convenience method sending HTTP POST requests. A JSON body can be passed into this method and is attached to the HTTP request.
+    A completion hanlder is executed  according to whether the response has been received properly or an error has occured during
+    the HTTP request. The error object is passed to the completionHanlder accordingly.*/
     func taskForPOSTMethod(urlString : String, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
 
         let url = NSURL(string: urlString)!
@@ -107,6 +110,8 @@ class UDACityClient {
     }
     
     
+    /*This method sends an HTTP delete request to the UDACity API in order 
+    to delte the user session.*/
     func deleteUDACitySession(completionHandler: (success : Bool, error : NSError?) -> Void ){
     
         let request = NSMutableURLRequest(URL: NSURL(string: URLs.SESSION_ID_URL)!)
@@ -149,7 +154,6 @@ class UDACityClient {
 
 
     // MARK: Shared Instance
-
     class func sharedInstance() -> UDACityClient {
 
         struct Singleton {
@@ -158,6 +162,4 @@ class UDACityClient {
 
         return Singleton.sharedInstance
     }
-
-
 }
