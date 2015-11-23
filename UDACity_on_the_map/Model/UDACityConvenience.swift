@@ -38,11 +38,12 @@ extension UDACityClient {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        do {
-            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body_params, options: NSJSONWritingOptions.PrettyPrinted)
-        } catch {
-            print("JSON data couldn't be serialized into http body")
-        }
+      //  do {
+            //request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body_params, options: NSJSONWritingOptions.PrettyPrinted)
+            request.HTTPBody = "{\"udacity\": {\"username\": \"\(self.userName!)\", \"password\": \"\(self.password!)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+//        } catch {
+//            print("JSON data couldn't be serialized into http body")
+//        }
 
         let task = self.taskForPOSTMethod(URLs.SESSION_ID_URL, jsonBody: body_params) {
             (result, error) in
