@@ -47,7 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             (studentLocations, error) in
             guard error == nil else {
                 print("error while download student locations: \(error)");
-                Helpers.showAlertView(withMessage: "Error while downloading student locations", fromViewController: self, withCompletionHandler: nil)
+                Helpers.showAlertView(withMessage: "Error while downloading student locations: \(error)", fromViewController: self, withCompletionHandler: nil)
                 return
             }
             self.refreshMap(with: studentLocations)
@@ -105,6 +105,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         return pinView
     }
 
+    
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
