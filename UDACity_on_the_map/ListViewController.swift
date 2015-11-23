@@ -31,7 +31,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cell == nil {
             cell = UITableViewCell()
         }
-        let studentName = "\(ParseAPIClient.studentLocations[indexPath.row].firstName) \(ParseAPIClient.studentLocations[indexPath.row].lastName)"
+        let studentName = "\(ParseAPIClient.studentLocations[indexPath.row].firstName!) \(ParseAPIClient.studentLocations[indexPath.row].lastName!)"
         cell!.textLabel?.text = studentName
         
         return cell!
