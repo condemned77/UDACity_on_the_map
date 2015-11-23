@@ -15,7 +15,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(animated: Bool) {
         print("list view did appear")
-        self.refreshStudentLocations()
+//        self.refreshStudentLocations()
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,6 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     /*Callback method for returning the amount of table rows (corresponds to amount
     of student locations)*/
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("amount of rows: \(ParseAPIClient.studentLocations.count)")
         return ParseAPIClient.studentLocations.count
     }
     
@@ -60,11 +61,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
             guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self, withCompletionHandler: nil); return}
+            self.refreshTableOnMainThread()
         }
-        self.tableView.reloadData()
+        
         print("refreshed list")
     }
     
+    func refreshTableOnMainThread() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
+    }
 
     /*finishing logout by dismissing the viewController from the main thread.*/
     func finishLogout() {
