@@ -36,6 +36,7 @@ class InformationPostingViewController : UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         self.locationTextField.delegate = CommonTextFieldDelegate.sharedInstance()
+        self.urlTextField.delegate = CommonTextFieldDelegate.sharedInstance()
     }
     
     /*When the findOnTheMapButton is pressed, the UI has to change. The UI will be rearranged
