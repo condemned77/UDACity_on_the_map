@@ -51,7 +51,14 @@ class ParseAPIClient: NSObject {
     */
     static func POSTLocationRequest(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: ParseAPIConstants.URLs.STUDENTLOCATION)!)
+        let params = [
+            "order" : "-updatedAd",
+            "limit" : "100"
+        ]
+        
+        let studentLocationURLString = ParseAPIConstants.URLs.STUDENTLOCATION + Helpers.escapedParameters(params)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: studentLocationURLString)!)
         request.addValue(ParseAPIConstants.APPLICATION_ID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(ParseAPIConstants.REST_API_Key, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -59,7 +66,7 @@ class ParseAPIClient: NSObject {
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
             guard error == nil else {
-                let requestError = NSError(domain: "Couldn't complete request, check you internet connection.", code: (error?.code)!, userInfo: nil)
+                let requestError = NSError(domain: "Couldn't complete request. Please check your internet connection.", code: (error?.code)!, userInfo: nil)
                 completionHandler(result: nil, error: requestError)
                 return
             }
@@ -70,7 +77,7 @@ class ParseAPIClient: NSObject {
         task.start()
     }
     
-    /*Conveniencem method for posting student data to the ParseAPI servers. The method takes a student struct (see ParseAPIMapData.swift),
+    /*Convenience method for posting student data to the ParseAPI servers. The method takes a student struct (see ParseAPIMapData.swift),
     and extracts the relevant information accordingly:
     1. student's first and last name
     2. a uniqueKey, which is supposed to be the Udacity account (user) id
