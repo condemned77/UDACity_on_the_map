@@ -47,7 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             (studentLocations, error) in
             guard error == nil else {
                 print("error while download student locations: \(error)");
-                Helpers.showAlertView(withMessage: "Error while downloading student locations: \(error)", fromViewController: self, withCompletionHandler: nil)
+                Helpers.showAlertView(withMessage: "Error while downloading student locations: \(error!)", fromViewController: self, withCompletionHandler: nil)
                 return
             }
             self.refreshMap(with: studentLocations)
