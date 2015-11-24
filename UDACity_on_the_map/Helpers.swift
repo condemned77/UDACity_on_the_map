@@ -53,6 +53,9 @@ struct Helpers {
         let alertController = UIAlertController(title: "Login Error", message: errorMessage, preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(OKAction)
+        if ActivityIndicator.sharedInstance.isShowingOnViewController(vc) {
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: vc)
+        }
         dispatch_async(dispatch_get_main_queue(), {
             vc.presentViewController(alertController, animated: true, completion: ch)
         })

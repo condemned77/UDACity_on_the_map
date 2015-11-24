@@ -33,6 +33,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         let studentName = "\(ParseAPIClient.studentLocations[indexPath.row].firstName!) \(ParseAPIClient.studentLocations[indexPath.row].lastName!)"
         cell!.textLabel?.text = studentName
+        cell!.detailTextLabel?.text = ParseAPIClient.studentLocations[indexPath.row].mediaURL!
         
         return cell!
     }
@@ -52,7 +53,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     /*Convenience method for opening a URL (as string) in safari.*/
     func openURLInSafari(url : String) {
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        if UIApplication.sharedApplication().openURL(NSURL(string: url)!) == false{
+            Helpers.showAlertView(withMessage: "URL (\(url)) is invalid", fromViewController: self, withCompletionHandler: nil)
+        }
     }
     
     /*Uses the ParseAPIClient to request student locations.
@@ -64,9 +67,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self, withCompletionHandler: nil); return}
             self.refreshTableOnMainThread()
             ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
+             print("refreshed list")
         }
-        
-        print("refreshed list")
     }
     
     func refreshTableOnMainThread() {
