@@ -61,7 +61,7 @@ class ParseAPIClient: NSObject {
     static func POSTLocationRequest(completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         let params = [
-            "order" : "-updatedAd",
+//            "order" : "-updatedAd",
             "limit" : "100"
         ]
         

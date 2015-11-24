@@ -59,36 +59,6 @@ struct Helpers {
     }
     
     
-    /*Convenience method for displaying an activity indicator from any view controller.
-    The activity indicator is a shared instance.*/
-    static func showActivityIndicator(fromViewController vc : UIViewController) {
-        let actInd = Helpers.sharedActivityIndicator()
-        actInd.center = vc.view.center
-        vc.view.addSubview(actInd)
-        actInd.startAnimating()
-    }
-    
-    /*Convenience method for dismissing the activity indicator of the sharedInstance.*/
-
-    static func dismissActivityIndicator(fromViewController vc : UIViewController) {
-        let actInd = Helpers.sharedActivityIndicator()
-        actInd.removeFromSuperview()
-        actInd.stopAnimating()
-    }
-    
-    /*singleton convenience method + setup of activity indicator properties.*/
-    static var activityIndicator : UIActivityIndicatorView? = nil
-    static func sharedActivityIndicator() -> UIActivityIndicatorView{
-        
-        if activityIndicator == nil {
-            Helpers.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-            Helpers.activityIndicator!.hidesWhenStopped = true
-            Helpers.activityIndicator!.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        }
-        return Helpers.activityIndicator!
-    }
-    
     static let AppColorBlue : UIColor = UIColor(colorLiteralRed: 0.0, green: 0.478431373, blue: 1, alpha: 1.0)
     static let AppColorGrey : UIColor = UIColor(colorLiteralRed: 0.921568627, green: 0.925490196, blue: 0.945098039, alpha: 1.0)
-
 }

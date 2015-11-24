@@ -66,6 +66,7 @@ class InformationPostingViewController : UIViewController, UITextFieldDelegate {
     func submitStudentPin(){
         let studentURL = self.urlTextField.text
         self.studentLocation.mediaURL = studentURL
+        ActivityIndicator.sharedInstance.showActivityIndicator(fromViewController: self)
         ParseAPIClient.addStudentLocationToParseAPI(self.studentLocation) {
             (success, error) in
             if success {
@@ -73,6 +74,7 @@ class InformationPostingViewController : UIViewController, UITextFieldDelegate {
             } else {
                 Helpers.showAlertView(withMessage: "Coudln't post location: \(error)", fromViewController: self, withCompletionHandler: nil)
             }
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
         }
     }
         
@@ -81,10 +83,11 @@ class InformationPostingViewController : UIViewController, UITextFieldDelegate {
     If the location isn't found, an alertview is presented.*/
     func findLocation(fromString location : String) {
         //search for location and set it to the map.
+        ActivityIndicator.sharedInstance.showActivityIndicator(fromViewController: self)
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(self.locationTextField.text!) {
             (placemarks, error) in
-            Helpers.showActivityIndicator(fromViewController: self)
+            
             guard error == nil else {
                 print(error)
                 Helpers.showAlertView(withMessage: "Couldn't find any location based on the string: \(self.locationTextField.text!)\n Please enter another string.", fromViewController: self, withCompletionHandler: nil)
@@ -96,20 +99,19 @@ class InformationPostingViewController : UIViewController, UITextFieldDelegate {
             if let placemark = placemarks?[0] {
                 // set the student location
                 self.setStudentLocation(withPlacemark: placemark, location: location, andUniqKey: UDACityClient.sharedInstance().udaCityAccountID!)
-                
-                
+
                 self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
                 // zoom on the selected location
                 let span = MKCoordinateSpanMake(0.01, 0.01)
                 let region = MKCoordinateRegion(center: placemark.location!.coordinate, span: span)
                 self.mapView.setRegion(region, animated: true)
                 self.rearrangeUIToSubmitView()
-                Helpers.dismissActivityIndicator(fromViewController: self)
+                
                 
             } else {
                 Helpers.showAlertView(withMessage: "Server didn't return any locations", fromViewController: self, withCompletionHandler: {self.dismissViewControllerAnimated(true, completion: nil)})
             }
-            //                ActivityIndicator.shared.hide()
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
         }
     }
     

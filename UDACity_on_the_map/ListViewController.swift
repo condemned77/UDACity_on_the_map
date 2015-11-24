@@ -58,10 +58,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     /*Uses the ParseAPIClient to request student locations.
     When location are received, the data is used to refresh the list content.*/
     func refreshStudentLocations() {
+        ActivityIndicator.sharedInstance.showActivityIndicator(fromViewController: self)
         ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
             guard nil == error else {Helpers.showAlertView(withMessage: error!.domain, fromViewController: self, withCompletionHandler: nil); return}
             self.refreshTableOnMainThread()
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
         }
         
         print("refreshed list")

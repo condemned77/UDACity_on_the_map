@@ -46,6 +46,7 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
     When the login is sucessfully completed, the map is loaded. Otherwise and alert view will
     show an error.*/
     func startLoginProcess() {
+        ActivityIndicator.sharedInstance.showActivityIndicator(fromViewController: self)
         self.udacityClient.loginToUDACity() {
             (success, errorString) in
 
@@ -55,6 +56,7 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
                 //show alert view
                 Helpers.showAlertView(withMessage: errorString!, fromViewController: self, withCompletionHandler: nil)
             }
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
         }
     }
 

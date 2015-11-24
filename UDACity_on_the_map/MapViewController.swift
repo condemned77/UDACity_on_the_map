@@ -43,6 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     /*Entry method which uses the ParseAPIClient to request student locations.
     When location are received, the data is used to refresh the map content.*/
     func loadStudentLocationsToMap() {
+        ActivityIndicator.sharedInstance.showActivityIndicator(fromViewController: self)
         ParseAPIClient.requestStudentLocations() {
             (studentLocations, error) in
             guard error == nil else {
@@ -51,6 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 return
             }
             self.refreshMap(with: studentLocations)
+            ActivityIndicator.sharedInstance.dismissActivityIndicator(fromViewController: self)
         }
     }
     
